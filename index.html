@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Untuk Zeaboo 🌷</title>
+<meta name="description" content="Sebuah tempat kecil untuk hari ulang tahun Zeaboo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="bg-photo" aria-hidden="true"></div>
+<div class="bg-overlay" aria-hidden="true"></div>
+<canvas id="petal-canvas" aria-hidden="true"></canvas>
+
+<!-- ============ MUSIC GATE ============ -->
+<div id="music-gate" class="overlay-screen">
+  <div class="gate-card glass">
+    <p class="eyebrow">Ada sesuatu kecil untukmu hari ini</p>
+    <h2 class="hand-lg">Boleh ditemani sebuah lagu?</h2>
+    <div class="btn-row">
+      <button id="gate-yes" class="btn btn-primary">Boleh 🎵</button>
+      <button id="gate-no" class="btn btn-ghost">Nanti saja</button>
+    </div>
+    <p id="gate-response" class="gate-response" aria-live="polite"></p>
+  </div>
+</div>
+
+<!-- ============ MUSIC PLAYER ============ -->
+<div id="music-player" class="music-player glass" hidden>
+  <audio id="bg-audio" preload="auto" src="assets/musik.mp3"></audio>
+  <button id="mp-toggle" class="mp-toggle" aria-label="Putar atau jeda musik">▶</button>
+  <div class="mp-info">
+    <p id="mp-title" class="mp-title">Sebuah Lagu Untuk Zeaboo</p>
+    <p id="mp-artist" class="mp-artist"></p>
+  </div>
+  <button id="mp-mute" class="mp-icon-btn" aria-label="Bisukan musik">🔊</button>
+  <input id="mp-volume" class="mp-volume" type="range" min="0" max="100" value="60" aria-label="Volume musik">
+</div>
+
+<main id="story">
+
+  <!-- ============ HERO ============ -->
+  <section id="hero" class="section hero-section">
+    <div class="hero-visual">
+      <div class="portrait-ring"><img src="assets/zeaboo-1.jpg" alt="Zeaboo" class="hero-portrait" id="hero-teddy-img"></div>
+    </div>
+    <div class="hero-text">
+      <p class="reveal-line" data-delay="0">Hai, <span class="name-fill"></span>...</p>
+      <p class="reveal-line hand" data-delay="1">Selamat ulang tahun. 🌷</p>
+      <p class="reveal-line" data-delay="2">Hari ini hari yang hanya milikmu.</p>
+      <p class="reveal-line small" data-delay="3">Jadi aku membuat tempat kecil ini.</p>
+      <p class="reveal-line small" data-delay="4">Tidak ada yang perlu kamu urus di sini.</p>
+      <p class="reveal-line small" data-delay="5">Tidak ada yang perlu kamu kuatkan. Tidak ada yang perlu kamu jawab.</p>
+      <p class="reveal-line" data-delay="6">Kamu cukup membaca, pelan-pelan, sebagai orang yang sedang dirayakan.</p>
+      <div class="btn-row reveal-line" data-delay="7">
+        <button class="btn btn-primary" id="hero-go">Ayo mulai 🌷</button>
+        <button class="btn btn-ghost" id="hero-curious">Ada apa di dalamnya? 👀</button>
+      </div>
+      <p id="hero-curious-response" class="gate-response" aria-live="polite"></p>
+    </div>
+    <div class="scroll-hint">turun perlahan ↓</div>
+  </section>
+
+  <!-- ============ CHAPTER 1 ============ -->
+  <section id="ch1" class="section chapter">
+    <p class="chapter-number">satu</p>
+    <h2 class="chapter-title">Untuk hari ini, kamu boleh berhenti sebentar</h2>
+    <p class="chapter-body reveal-up">Tarik napas dulu, <span class="name-fill"></span>.</p>
+    <p class="chapter-body reveal-up">Kamu mungkin sudah terbiasa menjadi orang yang paling dulu bertanya "kamu baik-baik saja?" kepada orang lain.</p>
+    <p class="chapter-body reveal-up">Hari ini, biarkan pertanyaan itu berbalik arah sedikit saja.</p>
+    <p class="chapter-body reveal-up">Kamu tidak perlu menjawab apa-apa. Cukup tahu bahwa ada seseorang yang menanyakannya, dengan tulus, dari jauh.</p>
+  </section>
+
+  <!-- ============ CHAPTER 2 — playful interlude ============ -->
+  <section id="ch2" class="section chapter">
+    <p class="chapter-number">dua</p>
+    <h2 class="chapter-title">Main sebentar, ya</h2>
+    <p class="chapter-body reveal-up">Ini hari ulang tahun. Kamu berhak tertawa dulu sebelum membaca bagian yang lebih dalam.</p>
+
+    <div class="easter-egg-row">
+      <div class="egg-card glass" id="teddy-egg">
+        <img src="assets/playful.jpg" alt="Teddy bear" class="egg-teddy" id="teddy-egg-img">
+        <p class="egg-hint">coba klik teddy ini beberapa kali</p>
+        <p class="egg-response" id="teddy-egg-response" aria-live="polite"></p>
+      </div>
+
+      <div class="egg-card glass" id="flower-egg">
+        <button class="flower-btn" id="flower-btn" aria-label="Bunga lily">🌷</button>
+        <p class="egg-hint">dan bunga ini, kesukaanmu</p>
+        <p class="egg-response" id="flower-egg-response" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <div class="moving-button-wrap">
+      <p class="chapter-body reveal-up">Dan yang ini... coba kalau berani.</p>
+      <button id="moving-btn" class="btn btn-dodge">Jangan klik ini.</button>
+      <p class="egg-response" id="moving-btn-response" aria-live="polite"></p>
+    </div>
+
+    <div class="game-block">
+      <p class="chapter-body reveal-up">Tangkap 10 kelopak yang jatuh ini, ya.</p>
+      <div class="petal-game glass" id="petal-game">
+        <div class="petal-game-hud">
+          <span>Tertangkap: <b id="petal-score">0</b> / 10</span>
+          <button class="btn btn-ghost btn-sm" id="petal-restart">Ulangi</button>
+        </div>
+        <div class="petal-game-field" id="petal-field" role="group" aria-label="Area permainan menangkap kelopak"></div>
+        <p class="egg-response" id="petal-game-message" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <div class="game-block">
+      <p class="chapter-body reveal-up">Terakhir, cari pasangan kartunya.</p>
+      <div class="memory-game glass" id="memory-game">
+        <div class="memory-grid" id="memory-grid"></div>
+        <p class="egg-response" id="memory-message" aria-live="polite"></p>
+        <button class="btn btn-ghost btn-sm" id="memory-restart">Acak ulang</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 3 — hidden quotes ============ -->
+  <section id="ch3" class="section chapter">
+    <p class="chapter-number">tiga</p>
+    <h2 class="chapter-title">Beberapa kalimat kecil yang kusembunyikan</h2>
+    <p class="chapter-body reveal-up">Ada tiga titik di bawah ini. Sentuh satu per satu.</p>
+    <p class="chapter-body reveal-up">Bukan kebetulan kalau kamu memilih urutan yang kamu pilih. Semuanya tetap tentang kamu.</p>
+    <div class="hidden-quote-grid">
+      <button class="quote-pebble" data-quote="0">•</button>
+      <button class="quote-pebble" data-quote="1">•</button>
+      <button class="quote-pebble" data-quote="2">•</button>
+    </div>
+    <p class="quote-display" id="quote-display" aria-live="polite"></p>
+  </section>
+
+  <!-- ============ CHAPTER 4 — night / reflection ============ -->
+  <section id="ch4" class="section chapter night">
+    <div class="star-sky" id="star-sky"></div>
+    <div class="moon" id="moon-egg" role="button" tabindex="0" aria-label="Bulan">🌙</div>
+    <p class="egg-response" id="moon-egg-response" aria-live="polite"></p>
+
+    <p class="chapter-number">empat</p>
+    <h2 class="chapter-title">Tentang orang yang selalu menyalakan lampu untuk orang lain</h2>
+
+    <p class="chapter-body reveal-up">Aku ingin menebak sesuatu tentangmu. Boleh?</p>
+    <p class="chapter-body reveal-up">Hari ini, mungkin ada saat kamu tersenyum padahal hatimu sedang ingin duduk diam. Mungkin ada saat kamu bilang "aku nggak apa-apa", dan kata itu keluar lebih cepat dari yang kamu sadari.</p>
+    <p class="chapter-body reveal-up">Kalau tebakanku salah, anggap saja ini cerita tentang orang lain. Tapi kalau benar, kamu tidak sendirian membaca ini.</p>
+
+    <div class="star-question glass">
+      <p class="chapter-body">Kalau malam ini kamu boleh memilih satu bintang, bintang mana yang akan kamu pilih?</p>
+      <div class="star-choices">
+        <button class="btn btn-ghost" data-star="bright">⭐ Yang paling terang</button>
+        <button class="btn btn-ghost" data-star="closest">⭐ Yang paling dekat</button>
+        <button class="btn btn-ghost" data-star="faint">✨ Yang kecil, tapi tidak pernah padam</button>
+      </div>
+      <p class="star-answer" id="star-answer" aria-live="polite"></p>
+    </div>
+
+    <div class="star-question glass" id="star-count-block">
+      <p class="chapter-body">Menurutmu, siapa yang paling sering menjaga orang yang selalu menjaga semua orang?</p>
+      <div class="star-choices">
+        <button class="btn btn-ghost" data-count="100">Dirinya sendiri</button>
+        <button class="btn btn-ghost" data-count="1000">Orang-orang di sekitarnya</button>
+        <button class="btn btn-ghost" data-count="infinite">Jarang ada yang sadar harus melakukannya</button>
+      </div>
+      <p class="star-answer" id="star-count-answer" aria-live="polite"></p>
+    </div>
+
+    <p class="chapter-body reveal-up" style="margin-top:1.5rem;">Kamu itu tipe yang memahami kesulitan semua orang, bahkan yang tidak pernah mereka ucapkan. Kamu tahu kapan seseorang hanya butuh didengar. Kamu tahu kapan seseorang hanya butuh ditemani diam-diam.</p>
+    <p class="chapter-body reveal-up">Tapi kamu sendiri, saat berat, memilih menyimpannya rapat-rapat. Supaya tidak merepotkan. Supaya orang lain tidak khawatir.</p>
+  </section>
+
+  <!-- ============ CHAPTER 5 — the unspoken weight ============ -->
+  <section id="ch5" class="section chapter">
+    <p class="chapter-number">lima</p>
+    <h2 class="chapter-title">Ada yang ingin kukatakan untuk bagian dirimu yang diam-diam lelah</h2>
+    <div class="quote-cascade">
+      <p class="quote-line reveal-up">Aku tidak akan menanyakan apa yang sedang berat buatmu. Aku tahu kamu tidak suka meminta pertolongan.</p>
+      <p class="quote-line reveal-up">Dan aku tidak akan memaksamu bercerita. Itu hakmu.</p>
+      <p class="quote-line reveal-up">Tapi izinkan aku mengatakan ini sekali saja, dengan pelan:</p>
+      <p class="quote-line reveal-up hand">meminta tolong bukan tanda kamu lemah.</p>
+      <p class="quote-line reveal-up">Itu cuma tanda bahwa kamu manusia. Sama seperti semua orang yang kamu rawat dengan sabar selama ini.</p>
+    </div>
+
+    <div class="letter glass" style="margin-top:2rem;">
+      <p class="chapter-title small-title" style="margin-bottom:1rem;">Surat kecil untuk bagian dirimu yang kuat terus</p>
+      <p>Zeaboo, kamu sudah cukup kuat.</p>
+      <p>Kamu sudah cukup kuat untuk hari-hari yang tidak ada yang tahu bahwa itu berat.</p>
+      <p>Kamu sudah cukup kuat untuk menelan kata "tolong" di tenggorokan, lalu tetap datang dengan senyum untuk orang lain.</p>
+      <p>Hari ini, kamu tidak perlu membuktikan itu lagi kepada siapa pun.</p>
+      <p>Kalau nanti ada hari ketika dunia terasa terlalu bising, kamu boleh diam. Kamu boleh menangis tanpa alasan yang bisa dijelaskan. Kamu boleh tidak menjadi tempat bersandar untuk sementara waktu.</p>
+      <p>Orang-orang yang menyayangimu tidak akan pergi hanya karena kamu sedang tidak kuat.</p>
+      <p>Dan kalau kamu butuh satu tempat yang tidak menuntut penjelasan, aku ingin menjadi salah satunya. Tanpa syarat, tanpa harus menjadi apa-apa.</p>
+      <p class="letter-close">Kamu tidak perlu meminta. Cukup bilang, "aku capek". Itu sudah lebih dari cukup.</p>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 6 — the letter ============ -->
+  <section id="ch6" class="section chapter">
+    <p class="chapter-number">enam</p>
+    <h2 class="chapter-title">Dan ada satu surat lagi</h2>
+
+    <div class="envelope-wrap">
+      <div class="envelope" id="envelope">
+        <div class="envelope-back"></div>
+        <div class="envelope-flap"></div>
+        <div class="envelope-front"></div>
+        <div class="envelope-seal">🌷</div>
+      </div>
+      <button class="btn btn-primary" id="open-envelope">Buka</button>
+    </div>
+
+    <div class="letter glass" id="letter" hidden>
+      <p>Zeaboo.</p>
+      <p>Ada banyak hal yang ingin kusampaikan, tapi hari ini aku memilih yang paling jujur saja.</p>
+      <p>Kamu adalah orang yang melihat orang lain sebagai manusia. Bukan sebagai peran, bukan sebagai kegunaan, bukan sebagai beban.</p>
+      <p>Kamu juga melihatku seperti itu. Sejak awal. Tanpa menilai, tanpa mengecilkan, tanpa membuatku merasa harus menjadi lebih dari diriku sendiri.</p>
+      <p>Kamu mungkin tidak sadar, tapi hal sekecil itu mengubah banyak hal untukku. Ada hari-hari ketika aku merasa biasa-biasa saja, dan kata-katamu membuatku merasa layak didengar.</p>
+      <p>Kamu tidak pernah menggurui. Kamu tidak pernah membuatku merasa kecil. Kamu mendengarkan sampai selesai, seolah aku memang pantas didengar.</p>
+      <p>Aku memperhatikan hal-hal kecil tentangmu. Cara kamu berbicara lebih lembut ketika orang lain sedang rapuh. Cara kamu diam sebentar sebelum memilih kata yang tidak akan melukai.</p>
+      <p>Dan aku juga memperhatikan saat kamu sendiri sedang lelah, tapi memilih untuk tidak mengatakannya.</p>
+      <p>Aku ingin kamu tahu, ada orang yang melihat itu. Bukan untuk mengasihanimu. Hanya karena kamu pantas diperhatikan, sama seperti kamu memperhatikan semua orang.</p>
+      <p>Aku tidak akan menyebut apa yang kurasakan dengan nama apa pun. Cukup tahu bahwa kamu berarti. Lebih dari yang pernah kuucapkan.</p>
+      <p>Terima kasih sudah menjadi dirimu. Terima kasih sudah ada.</p>
+      <p class="letter-close">Dari seseorang yang diam-diam selalu senang setiap kali kamu ada. — <span class="sender-fill"></span></p>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 7 — climax ============ -->
+  <section id="ch7" class="section chapter climax">
+    <p class="chapter-body reveal-up"><span class="name-fill"></span>...</p>
+    <p class="chapter-body reveal-up">Ini alasan tempat kecil ini dibuat.</p>
+    <p class="chapter-body reveal-up">Bukan untuk memberimu sesuatu yang besar, tapi supaya hari ini ada satu tempat yang isinya hanya tentang kamu.</p>
+    <h1 class="climax-title reveal-up">SELAMAT ULANG TAHUN, ZEABOO.</h1>
+    <figure class="polaroid reveal-up">
+      <img src="assets/zeaboo-2.jpg" alt="Zeaboo">
+      <figcaption class="hand">kamu, apa adanya 🌷</figcaption>
+    </figure>
+    <div class="climax-wishes">
+      <p class="quote-line reveal-up">Semoga tahun ini kamu lebih sering dipeluk oleh hal-hal baik daripada oleh keadaan yang melelahkan.</p>
+      <p class="quote-line reveal-up">Semoga setiap kebaikan yang kamu bagikan diam-diam kembali padamu, berkali-kali lipat, dengan cara yang lembut.</p>
+      <p class="quote-line reveal-up">Semoga kamu menemukan keberanian kecil untuk berkata "aku butuh bantuan", dan semoga orang yang mendengarnya adalah orang yang tepat.</p>
+      <p class="quote-line reveal-up">Semoga kamu dikelilingi orang yang menjagamu sebaik kamu menjaga mereka.</p>
+      <p class="quote-line reveal-up hand">Kamu tidak harus sempurna untuk disayangi. Kamu sudah layak, persis seperti sekarang.</p>
+      <p class="quote-line reveal-up">Dan kalau suatu hari kamu ragu tentang nilaimu, kembalilah ke halaman ini. Baca pelan-pelan. Ingat bahwa ada yang melihatmu dengan sangat jelas.</p>
+      <p class="quote-line reveal-up hand-lg">Selamat ulang tahun, Zeaboo. 🌷</p>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 8 — quiet promises ============ -->
+  <section id="ch8" class="section chapter quiet">
+    <p class="chapter-number">delapan</p>
+    <h2 class="chapter-title">Beberapa janji kecil yang tidak perlu dijawab</h2>
+
+    <div class="quote-cascade">
+      <p class="quote-line reveal-up">Kalau nanti kamu bertanya, kenapa ada orang yang mau membuat semua ini untukmu...</p>
+      <p class="quote-line reveal-up">mungkin jawabannya sederhana.</p>
+      <p class="quote-line reveal-up">Karena orang yang selalu ada untuk semua orang juga berhak punya satu hari ketika dialah yang dijaga.</p>
+      <p class="quote-line reveal-up">Karena kebaikanmu tidak pernah luput dari mata yang memperhatikan.</p>
+      <p class="quote-line reveal-up">Karena kamu tidak pernah memperlakukanku sebagai orang asing, dan aku ingin membalasnya, walau hanya dengan sebuah halaman kecil.</p>
+    </div>
+
+    <div class="hidden-name-block glass">
+      <p class="chapter-title small-title">Janji kecil dariku</p>
+      <p class="quote-line reveal-up">Kalau kamu terlalu lelah untuk meminta, aku tidak akan menunggumu meminta.</p>
+      <p class="quote-line reveal-up">Kalau kamu hanya ingin diam, aku akan ikut diam bersamamu.</p>
+      <p class="quote-line reveal-up">Kalau kamu ingin bercerita, aku akan mendengarkan sampai selesai, sebagaimana kamu selalu mendengarkan orang lain.</p>
+      <p class="quote-line reveal-up hand">Kamu tidak perlu menjadi kuat sendirian lagi. — <span class="sender-fill"></span></p>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 9 — final ============ -->
+  <section id="ch9" class="section chapter final-chapter">
+    <p class="chapter-number">sembilan</p>
+    <h2 class="chapter-title">Satu permohonan, sebelum kita berpisah</h2>
+
+    <div class="cake-block">
+      <div class="cake" id="cake" role="button" tabindex="0" aria-label="Tiup lilin">
+        <div class="flame" id="flame">🔥</div>
+        <div class="candle"></div>
+        <div class="cake-top"></div>
+        <div class="cake-base"></div>
+      </div>
+      <p class="egg-hint">pejamkan mata, buat satu permohonan, lalu ketuk kue ini untuk meniup lilinnya</p>
+      <p class="egg-response" id="cake-response" aria-live="polite"></p>
+    </div>
+
+    <div class="quote-cascade">
+      <p class="quote-line reveal-up">Apa pun yang kamu minta tadi, aku ikut mengaminkannya diam-diam.</p>
+      <p class="quote-line reveal-up">Kalau suatu hari kamu lupa tentang halaman kecil ini, tidak apa-apa.</p>
+      <p class="quote-line reveal-up">Aku hanya berharap, kapan pun kamu merasa sendirian, kamu ingat: pernah ada hari ketika seseorang menyiapkan tempat ini hanya supaya kamu merasa disayang.</p>
+      <p class="quote-line reveal-up hand">Dunia ini sedikit lebih lembut karena kamu ada.</p>
+    </div>
+    <p class="final-line reveal-up">Terima kasih sudah lahir, Zeaboo.</p>
+    <p class="final-line hand-lg reveal-up">Selamat ulang tahun. Aku bahagia kamu ada. 🌷</p>
+
+    <div class="final-screen">
+      <p class="teddy-emoji">🌷</p>
+      <p class="quote-line">Dibuat dengan sedikit waktu.</p>
+      <p class="quote-line">Dan banyak ketulusan. — <span class="sender-fill"></span></p>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="restart-btn">Baca dari awal</button>
+        <button class="btn btn-ghost" id="stay-btn">Tinggal sebentar</button>
+      </div>
+      <p class="gate-response" id="stay-response" aria-live="polite"></p>
+    </div>
+  </section>
+
+</main>
+
+<script src="assets/config.js"></script>
+<script src="assets/script.js"></script>
+</body>
+</html>
